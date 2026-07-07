@@ -57,7 +57,8 @@ gradient boosting 계열을 도입한 결과 MLP, XGBoost, HistGradientBoosting�
 
 \section{데이터셋}
 
-데이터셋(\texttt{star\_classification.csv})은 SDSS 관측 천체 100{,}000건으로,
+데이터셋(\texttt{star\_classification.csv})은 Kaggle에 공개된 SDSS DR17 기반
+천체 분류 데이터셋~\cite{fedesoriano-sdss17}으로, 관측 천체 100{,}000건이
 17개 특성 컬럼과 타깃 \texttt{class}로 구성된다. 클래스 분포는 GALAXY 59{,}445건
 (59.4\%), STAR 21{,}594건 (21.6\%), QSO 18{,}961건 (19.0\%)으로 불균형하다.
 특성은 표~\ref{tab:features}와 같이 구분된다. 식별자·메타데이터 컬럼은 물리적
@@ -442,5 +443,14 @@ macro-F1 0.9755, 정확도 0.9788}까지 개선하였다. 오류 분석으로 �
         (식별자·메타데이터 컬럼의 사용은 관측 프로그램 정보가 새는 누수이므로
         배제)
 \end{itemize}
+
+\begin{thebibliography}{1}
+
+\bibitem{fedesoriano-sdss17}
+fedesoriano, ``Stellar Classification Dataset -- SDSS17,'' Kaggle.
+\url{https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17}
+(접속: 2026년 7월 7일).
+
+\end{thebibliography}
 
 \end{document}
