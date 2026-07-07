@@ -9,6 +9,7 @@ A stellar (astronomical object) classification project using a multilayer neural
 ## Dataset: `star_classification.csv`
 
 SDSS (Sloan Digital Sky Survey) stellar classification data: 100,000 rows, 17 feature columns plus a `class` target.
+Source: [Stellar Classification Dataset - SDSS17 (fedesoriano, Kaggle)](https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17) — cite this when referencing the dataset.
 
 - Target `class` has three values: GALAXY (59,445), STAR (21,594), QSO (18,961) — imbalanced.
 - Photometric features: `u`, `g`, `r`, `i`, `z` (filter magnitudes), plus `redshift`.
