@@ -71,6 +71,39 @@ def build_preprocessor(color_indices: bool = False):
     )
 
 
+def make_splits(color_indices: bool = False, return_preprocessor: bool = False):
+    """Deterministic train/val/test split (64k/16k/20k), scaled features.
+
+    Returns ({"train"|"val"|"test": (X ndarray, y ndarray)}, class names),
+    plus the fitted preprocessor when return_preprocessor=True.
+    Same seeds/stratification everywhere so all experiments share the split.
+    """
+    from sklearn.model_selection import train_test_split
+
+    df = load_clean()
+    if color_indices:
+        df = add_color_indices(df)
+    features = [*FEATURES, *COLOR_INDICES] if color_indices else FEATURES
+    classes = sorted(df[TARGET].unique())  # GALAXY, QSO, STAR
+    y_all = df[TARGET].map({c: i for i, c in enumerate(classes)}).to_numpy()
+
+    X_trainval, X_test, y_trainval, y_test = train_test_split(
+        df[features], y_all, test_size=0.2, random_state=42, stratify=y_all
+    )
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_trainval, y_trainval, test_size=0.2, random_state=42, stratify=y_trainval
+    )
+    pre = build_preprocessor(color_indices=color_indices)
+    splits = {
+        "train": (pre.fit_transform(X_train), y_train),
+        "val": (pre.transform(X_val), y_val),
+        "test": (pre.transform(X_test), y_test),
+    }
+    if return_preprocessor:
+        return splits, classes, pre
+    return splits, classes
+
+
 def main() -> None:
     from sklearn.model_selection import train_test_split
 

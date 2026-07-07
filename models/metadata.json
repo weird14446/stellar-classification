@@ -1,0 +1,35 @@
+{
+  "model": "soft-voting ensemble: MLP(64,32) x len(seeds) + XGBoost + HistGB",
+  "classes": [
+    "GALAXY",
+    "QSO",
+    "STAR"
+  ],
+  "features": [
+    "u",
+    "g",
+    "r",
+    "i",
+    "z",
+    "redshift",
+    "u-g",
+    "g-r",
+    "r-i",
+    "i-z"
+  ],
+  "mlp_seeds": [
+    0,
+    1,
+    2
+  ],
+  "metrics": {
+    "val": {
+      "macro_f1": 0.9736,
+      "accuracy": 0.9772
+    },
+    "test": {
+      "macro_f1": 0.9755,
+      "accuracy": 0.9788
+    }
+  }
+}
