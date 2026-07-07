@@ -17,6 +17,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+import plot_style
+from plot_style import CLASS_COLORS, CLASS_ORDER, INK, MUTED, SERIES_1, SURFACE
+
 ROOT = Path(__file__).resolve().parent
 FIGURES = ROOT / "figures"
 
@@ -25,35 +28,7 @@ NUMERIC_FEATURES = ["u", "g", "r", "i", "z", "redshift", "alpha", "delta"]
 # SDSS uses -9999 as an error sentinel in photometric magnitudes.
 SENTINEL = -9999.0
 
-# Chart chrome (light mode) — from the dataviz reference palette.
-SURFACE = "#fcfcfb"
-INK = "#0b0b0b"
-MUTED = "#898781"
-GRID = "#e1e0d9"
-BASELINE = "#c3c2b7"
-SERIES_1 = "#2a78d6"  # categorical slot 1 (blue)
-# Fixed class → color mapping (categorical slots 1-3).
-CLASS_ORDER = ["GALAXY", "STAR", "QSO"]
-CLASS_COLORS = {"GALAXY": "#2a78d6", "STAR": "#1baf7a", "QSO": "#eda100"}
-
-plt.rcParams.update(
-    {
-        "font.family": "sans-serif",
-        "figure.facecolor": SURFACE,
-        "axes.facecolor": SURFACE,
-        "text.color": INK,
-        "axes.edgecolor": BASELINE,
-        "axes.labelcolor": MUTED,
-        "xtick.color": MUTED,
-        "ytick.color": MUTED,
-        "axes.grid": True,
-        "grid.color": GRID,
-        "grid.linewidth": 0.6,
-        "axes.spines.top": False,
-        "axes.spines.right": False,
-        "axes.spines.left": False,
-    }
-)
+plot_style.apply()
 
 
 def report_overview(df: pd.DataFrame) -> None:

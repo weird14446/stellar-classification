@@ -25,6 +25,8 @@ PHOTOMETRIC = ["u", "g", "r", "i", "z"]
 FEATURES = [*PHOTOMETRIC, "redshift"]
 TARGET = "class"
 SENTINEL = -9999.0
+# Adjacent-band color indices, candidate derived features.
+COLOR_INDICES = {"u-g": ("u", "g"), "g-r": ("g", "r"), "r-i": ("r", "i"), "i-z": ("i", "z")}
 
 
 def load_clean(csv_path: Path = CSV_PATH) -> pd.DataFrame:
@@ -34,11 +36,21 @@ def load_clean(csv_path: Path = CSV_PATH) -> pd.DataFrame:
     return df.loc[~bad, [*FEATURES, TARGET]].reset_index(drop=True)
 
 
-def build_preprocessor():
+def add_color_indices(df: pd.DataFrame) -> pd.DataFrame:
+    """Return a copy with the four color-index columns appended."""
+    out = df.copy()
+    for name, (a, b) in COLOR_INDICES.items():
+        out[name] = out[a] - out[b]
+    return out
+
+
+def build_preprocessor(color_indices: bool = False):
     """ColumnTransformer implementing the scaling policy.
 
     Fit on the training split only; sklearn is imported lazily so that
-    figure scripts can import load_clean without it.
+    figure scripts can import load_clean without it. With
+    color_indices=True the four derived columns (added beforehand via
+    add_color_indices) are RobustScaler-scaled like the magnitudes.
     """
     import numpy as np
     from sklearn.compose import ColumnTransformer
@@ -49,9 +61,10 @@ def build_preprocessor():
         FunctionTransformer(np.log1p, feature_names_out="one-to-one"),
         StandardScaler(),
     )
+    robust_cols = [*PHOTOMETRIC, *COLOR_INDICES] if color_indices else PHOTOMETRIC
     return ColumnTransformer(
         [
-            ("photometric", RobustScaler(), PHOTOMETRIC),
+            ("robust", RobustScaler(), robust_cols),
             ("redshift", redshift_pipe, ["redshift"]),
         ],
         verbose_feature_names_out=False,
