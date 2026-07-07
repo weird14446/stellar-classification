@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk -F'\",\"' 'NR>1 {print $2}' \"/Users/iinsu/Library/CloudStorage/GoogleDrive-ii3289857@gmail.com/My Drive/Github/stellar-classification/star_classification.csv\")",
+      "Bash(awk -F',' 'NR>1 {gsub\\(/\"/,\"\",$14\\); print $14}' \"/Users/iinsu/Library/CloudStorage/GoogleDrive-ii3289857@gmail.com/My Drive/Github/stellar-classification/star_classification.csv\")",
+      "Bash(git checkout *)",
+      "Bash(python3 -c \"import pandas, matplotlib; print\\(pandas.__version__, matplotlib.__version__\\)\")",
+      "Skill(dataviz)"
+    ]
+  }
+}
