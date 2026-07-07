@@ -24,8 +24,8 @@ from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
 import plot_style
+from model import MLP
 from plot_style import INK, MUTED, SERIES_1
-from preprocess import COLOR_INDICES, FEATURES, TARGET, add_color_indices, build_preprocessor, load_clean
 
 ROOT = Path(__file__).resolve().parent
 FIGURES = ROOT / "figures"
@@ -37,51 +37,17 @@ CONFIGS = {
     "+ both": {"color": True, "weight": True},
 }
 SEEDS = [0, 1, 2]
-HIDDEN = (64, 32)
 BATCH = 512
 MAX_EPOCHS = 200
 PATIENCE = 15
 DEVICE = "cpu"  # net is tiny; CPU is fast and reproducible
 
 
-class MLP(nn.Module):
-    def __init__(self, in_dim: int, n_classes: int = 3):
-        super().__init__()
-        layers: list[nn.Module] = []
-        prev = in_dim
-        for h in HIDDEN:
-            layers += [nn.Linear(prev, h), nn.ReLU()]
-            prev = h
-        layers.append(nn.Linear(prev, n_classes))
-        self.net = nn.Sequential(*layers)
-
-    def forward(self, x):
-        return self.net(x)
-
-
 def make_data(color: bool):
     """Split, scale (fit on train only), and return tensors + class names."""
-    from sklearn.model_selection import train_test_split
+    from preprocess import make_splits
 
-    df = load_clean()
-    if color:
-        df = add_color_indices(df)
-    features = [*FEATURES, *COLOR_INDICES] if color else FEATURES
-    classes = sorted(df[TARGET].unique())  # GALAXY, QSO, STAR
-    y_all = df[TARGET].map({c: i for i, c in enumerate(classes)}).to_numpy()
-
-    X_trainval, X_test, y_trainval, y_test = train_test_split(
-        df[features], y_all, test_size=0.2, random_state=42, stratify=y_all
-    )
-    X_train, X_val, y_train, y_val = train_test_split(
-        X_trainval, y_trainval, test_size=0.2, random_state=42, stratify=y_trainval
-    )
-    pre = build_preprocessor(color_indices=color)
-    splits = {
-        "train": (pre.fit_transform(X_train), y_train),
-        "val": (pre.transform(X_val), y_val),
-        "test": (pre.transform(X_test), y_test),
-    }
+    splits, classes = make_splits(color_indices=color)
     tensors = {
         k: (torch.tensor(X, dtype=torch.float32), torch.tensor(y, dtype=torch.long))
         for k, (X, y) in splits.items()
