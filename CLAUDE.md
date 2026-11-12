@@ -28,4 +28,5 @@ Save all generated figures (plots, charts, visualizations) as image files in the
 
 ## Environment Note
 
-The working directory lives inside Google Drive (`CloudStorage/GoogleDrive-...`), so file paths contain spaces and an `@` — always quote paths in shell commands.
+- **Conda Environment**: Use `conda activate dl_env` (Python 3.12 with PyTorch, XGBoost, Scikit-learn, Pandas, Matplotlib).
+- The working directory lives inside Google Drive (`CloudStorage/GoogleDrive-...`), so file paths contain spaces and an `@` — always quote paths in shell commands.

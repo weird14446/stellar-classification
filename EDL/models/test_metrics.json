@@ -1,0 +1,45 @@
+{
+  "champion_topology": "10 -> [104:gelu] -> [48:gelu] -> [48+skip:silu] -> 3",
+  "single_accuracy": 0.9743,
+  "single_macro_f1": 0.9706,
+  "accuracy": 0.9745,
+  "macro_f1": 0.9709,
+  "weighted_f1": 0.9744,
+  "confusion_matrix": [
+    [
+      11649,
+      122,
+      118
+    ],
+    [
+      259,
+      3532,
+      1
+    ],
+    [
+      10,
+      0,
+      4309
+    ]
+  ],
+  "per_class": {
+    "GALAXY": {
+      "precision": 0.9774,
+      "recall": 0.9798,
+      "f1-score": 0.9786,
+      "support": 11889
+    },
+    "QSO": {
+      "precision": 0.9666,
+      "recall": 0.9314,
+      "f1-score": 0.9487,
+      "support": 3792
+    },
+    "STAR": {
+      "precision": 0.9731,
+      "recall": 0.9977,
+      "f1-score": 0.9853,
+      "support": 4319
+    }
+  }
+}
