@@ -226,3 +226,6 @@ __marimo__/
 .claude/
 .agents/
 
+# Generated Zenodo upload archive
+zenodo_stellar_classification.zip
+
