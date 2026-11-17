@@ -1,0 +1,214 @@
+{
+  "algo": "memetic",
+  "classes": [
+    "GALAXY",
+    "QSO",
+    "STAR"
+  ],
+  "in_dim": 10,
+  "hidden_dims": [
+    104,
+    48,
+    48
+  ],
+  "activations": [
+    "gelu",
+    "gelu",
+    "silu"
+  ],
+  "input_skips": [
+    false,
+    false,
+    true
+  ],
+  "topology": {
+    "in_dim": 10,
+    "hidden_dims": [
+      104,
+      48,
+      48
+    ],
+    "activations": [
+      "gelu",
+      "gelu",
+      "silu"
+    ],
+    "input_skips": [
+      false,
+      false,
+      true
+    ],
+    "n_classes": 3
+  },
+  "topology_summary": "10 -> [104:gelu] -> [48:gelu] -> [48+skip:silu] -> 3",
+  "param_dim": 9169,
+  "pop_size": 8,
+  "hof_size": 8,
+  "hof_topologies": [
+    "10 -> [64:relu] -> [24:relu] -> 3",
+    "10 -> [64:relu] -> [32:elu] -> [32:gelu] -> 3",
+    "10 -> [64:relu] -> [40+skip:silu] -> 3",
+    "10 -> [80:silu] -> [32:gelu] -> [32:gelu] -> [32:relu] -> 3",
+    "10 -> [104:gelu] -> [48:gelu] -> [48+skip:silu] -> 3",
+    "10 -> [80:relu] -> [48+skip:gelu] -> [24:elu] -> 3",
+    "10 -> [72:elu] -> [44+skip:gelu] -> 3",
+    "10 -> [64:silu] -> [60:silu] -> 3"
+  ],
+  "hof_multipliers": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "topology_mutations": [
+    {
+      "generation": 1,
+      "event": "Island 1 [act(L1->elu)]: 10 -> [64:relu] -> [32:relu] -> 3 -> 10 -> [64:relu] -> [32:elu] -> 3 (Val F1 0.8969 -> 0.9102)"
+    },
+    {
+      "generation": 1,
+      "event": "Island 4 [widen(L0+16)]: 10 -> [80:gelu] -> [40:gelu] -> 3 -> 10 -> [96:gelu] -> [40:gelu] -> 3 (Val F1 0.9267 -> 0.9368)"
+    },
+    {
+      "generation": 1,
+      "event": "Island 7 [widen(L0+8)]: 10 -> [56:silu] -> [28:silu] -> 3 -> 10 -> [64:silu] -> [28:silu] -> 3 (Val F1 0.9144 -> 0.9242)"
+    },
+    {
+      "generation": 2,
+      "event": "Island 2 [act(L0->relu)]: 10 -> [64:gelu] -> [32+skip:silu] -> 3 -> 10 -> [64:relu] -> [32+skip:silu] -> 3 (Val F1 0.9507 -> 0.9533)"
+    },
+    {
+      "generation": 2,
+      "event": "Island 5 [prune_synapses(4%)]: 10 -> [64:relu] -> [48+skip:gelu] -> [24:relu] -> 3 -> 10 -> [64:relu] -> [48+skip:gelu] -> [24:relu] -> 3 (Val F1 0.9522 -> 0.9551)"
+    },
+    {
+      "generation": 3,
+      "event": "Island 0 [widen(L0+16)]: 10 -> [48:relu] -> [24:relu] -> 3 -> 10 -> [64:relu] -> [24:relu] -> 3 (Val F1 0.9444 -> 0.9471)"
+    },
+    {
+      "generation": 4,
+      "event": "Island 4 [widen(L1+8)]: 10 -> [96:gelu] -> [40:gelu] -> 3 -> 10 -> [96:gelu] -> [48:gelu] -> 3 (Val F1 0.9588 -> 0.9607)"
+    },
+    {
+      "generation": 5,
+      "event": "Island 2 [widen(L1+8)]: 10 -> [64:relu] -> [32+skip:silu] -> 3 -> 10 -> [64:relu] -> [40+skip:silu] -> 3 (Val F1 0.9592 -> 0.9606)"
+    },
+    {
+      "generation": 5,
+      "event": "Island 5 [widen(L0+16)]: 10 -> [64:relu] -> [48+skip:gelu] -> [24:relu] -> 3 -> 10 -> [80:relu] -> [48+skip:gelu] -> [24:relu] -> 3 (Val F1 0.9627 -> 0.9628)"
+    },
+    {
+      "generation": 8,
+      "event": "Island 5 [act(L2->elu)]: 10 -> [80:relu] -> [48+skip:gelu] -> [24:relu] -> 3 -> 10 -> [80:relu] -> [48+skip:gelu] -> [24:elu] -> 3 (Val F1 0.9649 -> 0.9653)"
+    },
+    {
+      "generation": 10,
+      "event": "Island 7 [widen(L1+16)]: 10 -> [64:silu] -> [28:silu] -> 3 -> 10 -> [64:silu] -> [44:silu] -> 3 (Val F1 0.9623 -> 0.9627)"
+    },
+    {
+      "generation": 12,
+      "event": "Island 0 [toggle_skip(L1)]: 10 -> [64:relu] -> [24:relu] -> 3 -> 10 -> [64:relu] -> [24+skip:relu] -> 3 (Val F1 0.9615 -> 0.9621)"
+    },
+    {
+      "generation": 12,
+      "event": "Island 3 [toggle_skip(L1)]: 10 -> [64:silu] -> [32+skip:relu] -> 3 -> 10 -> [64:silu] -> [32:relu] -> 3 (Val F1 0.9595 -> 0.9608)"
+    },
+    {
+      "generation": 12,
+      "event": "Island 6 [widen(L1+8)]: 10 -> [72:elu] -> [36+skip:relu] -> 3 -> 10 -> [72:elu] -> [44+skip:relu] -> 3 (Val F1 0.9620 -> 0.9628)"
+    },
+    {
+      "generation": 15,
+      "event": "Island 3 [prune_synapses(4%)]: 10 -> [64:silu] -> [32:relu] -> 3 -> 10 -> [64:silu] -> [32:relu] -> 3 (Val F1 0.9617 -> 0.9620)"
+    },
+    {
+      "generation": 16,
+      "event": "Island 1 [toggle_skip(L1)]: 10 -> [64:relu] -> [32:elu] -> 3 -> 10 -> [64:relu] -> [32+skip:elu] -> 3 (Val F1 0.9658 -> 0.9669)"
+    },
+    {
+      "generation": 18,
+      "event": "Island 3 [act(L1->gelu)]: 10 -> [64:silu] -> [32:relu] -> 3 -> 10 -> [64:silu] -> [32:gelu] -> 3 (Val F1 0.9613 -> 0.9620)"
+    },
+    {
+      "generation": 19,
+      "event": "Island 1 [toggle_skip(L1)]: 10 -> [64:relu] -> [32+skip:elu] -> 3 -> 10 -> [64:relu] -> [32:elu] -> 3 (Val F1 0.9654 -> 0.9668)"
+    },
+    {
+      "generation": 19,
+      "event": "Island 4 [prune_synapses(4%)]: 10 -> [96:gelu] -> [48:gelu] -> 3 -> 10 -> [96:gelu] -> [48:gelu] -> 3 (Val F1 0.9657 -> 0.9679)"
+    },
+    {
+      "generation": 21,
+      "event": "Island 3 [add_layer]: 10 -> [64:silu] -> [32:gelu] -> 3 -> 10 -> [64:silu] -> [32:gelu] -> [32+skip:gelu] -> 3 (Val F1 0.9631 -> 0.9643)"
+    },
+    {
+      "generation": 24,
+      "event": "Island 0 [prune_synapses(4%)]: 10 -> [64:relu] -> [24+skip:relu] -> 3 -> 10 -> [64:relu] -> [24+skip:relu] -> 3 (Val F1 0.9665 -> 0.9677)"
+    },
+    {
+      "generation": 24,
+      "event": "Island 3 [toggle_skip(L2)]: 10 -> [64:silu] -> [32:gelu] -> [32+skip:gelu] -> 3 -> 10 -> [64:silu] -> [32:gelu] -> [32:gelu] -> 3 (Val F1 0.9648 -> 0.9661)"
+    },
+    {
+      "generation": 25,
+      "event": "Island 1 [add_layer]: 10 -> [64:relu] -> [32:elu] -> 3 -> 10 -> [64:relu] -> [32:elu] -> [32:gelu] -> 3 (Val F1 0.9661 -> 0.9671)"
+    },
+    {
+      "generation": 27,
+      "event": "Island 6 [act(L1->gelu)]: 10 -> [72:elu] -> [44+skip:relu] -> 3 -> 10 -> [72:elu] -> [44+skip:gelu] -> 3 (Val F1 0.9667 -> 0.9672)"
+    },
+    {
+      "generation": 28,
+      "event": "Island 4 [add_layer]: 10 -> [96:gelu] -> [48:gelu] -> 3 -> 10 -> [96:gelu] -> [48:gelu] -> [48:silu] -> 3 (Val F1 0.9690 -> 0.9692)"
+    },
+    {
+      "generation": 30,
+      "event": "Island 3 [add_layer]: 10 -> [64:silu] -> [32:gelu] -> [32:gelu] -> 3 -> 10 -> [64:silu] -> [32:gelu] -> [32:gelu] -> [32:relu] -> 3 (Val F1 0.9667 -> 0.9681)"
+    },
+    {
+      "generation": 32,
+      "event": "Island 2 [widen(L1+8)]: 10 -> [64:relu] -> [40+skip:silu] -> 3 -> 10 -> [64:relu] -> [48+skip:silu] -> 3 (Val F1 0.9675 -> 0.9685)"
+    },
+    {
+      "generation": 34,
+      "event": "Island 4 [widen(L0+8)]: 10 -> [96:gelu] -> [48:gelu] -> [48:silu] -> 3 -> 10 -> [104:gelu] -> [48:gelu] -> [48:silu] -> 3 (Val F1 0.9687 -> 0.9700)"
+    },
+    {
+      "generation": 35,
+      "event": "Island 2 [prune_nodes(L1-8)]: 10 -> [64:relu] -> [48+skip:silu] -> 3 -> 10 -> [64:relu] -> [40+skip:silu] -> 3 (Val F1 0.9686 -> 0.9689)"
+    },
+    {
+      "generation": 36,
+      "event": "Island 0 [toggle_skip(L1)]: 10 -> [64:relu] -> [24+skip:relu] -> 3 -> 10 -> [64:relu] -> [24:relu] -> 3 (Val F1 0.9680 -> 0.9691)"
+    },
+    {
+      "generation": 36,
+      "event": "Island 3 [widen(L0+16)]: 10 -> [64:silu] -> [32:gelu] -> [32:gelu] -> [32:relu] -> 3 -> 10 -> [80:silu] -> [32:gelu] -> [32:gelu] -> [32:relu] -> 3 (Val F1 0.9688 -> 0.9692)"
+    },
+    {
+      "generation": 37,
+      "event": "Island 1 [prune_synapses(4%)]: 10 -> [64:relu] -> [32:elu] -> [32:gelu] -> 3 -> 10 -> [64:relu] -> [32:elu] -> [32:gelu] -> 3 (Val F1 0.9677 -> 0.9680)"
+    },
+    {
+      "generation": 37,
+      "event": "Island 4 [prune_synapses(4%)]: 10 -> [104:gelu] -> [48:gelu] -> [48:silu] -> 3 -> 10 -> [104:gelu] -> [48:gelu] -> [48:silu] -> 3 (Val F1 0.9695 -> 0.9700)"
+    },
+    {
+      "generation": 37,
+      "event": "Island 7 [widen(L1+16)]: 10 -> [64:silu] -> [44:silu] -> 3 -> 10 -> [64:silu] -> [60:silu] -> 3 (Val F1 0.9679 -> 0.9689)"
+    },
+    {
+      "generation": 43,
+      "event": "Island 1 [prune_synapses(4%)]: 10 -> [64:relu] -> [32:elu] -> [32:gelu] -> 3 -> 10 -> [64:relu] -> [32:elu] -> [32:gelu] -> 3 (Val F1 0.9683 -> 0.9691)"
+    },
+    {
+      "generation": 43,
+      "event": "Island 4 [toggle_skip(L2)]: 10 -> [104:gelu] -> [48:gelu] -> [48:silu] -> 3 -> 10 -> [104:gelu] -> [48:gelu] -> [48+skip:silu] -> 3 (Val F1 0.9706 -> 0.9713)"
+    }
+  ],
+  "best_generation": 43,
+  "best_val_macro_f1": 0.9713,
+  "best_val_accuracy": 0.9749,
+  "hof_val_macro_f1": 0.9712,
+  "hof_val_accuracy": 0.9749,
+  "total_time_seconds": 94.22
+}

@@ -1,0 +1,19 @@
+{
+  "algo": "ga",
+  "classes": [
+    "GALAXY",
+    "QSO",
+    "STAR"
+  ],
+  "in_dim": 10,
+  "hidden_dims": [
+    32,
+    16
+  ],
+  "param_dim": 931,
+  "pop_size": 60,
+  "best_generation": 50,
+  "best_val_macro_f1": 0.902,
+  "best_val_accuracy": 0.9116,
+  "total_time_seconds": 2.39
+}

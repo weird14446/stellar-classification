@@ -1,0 +1,189 @@
+{
+  "single_universe": {
+    "accuracy": 0.97545,
+    "macro_f1": 0.9717646387360889,
+    "weighted_f1": 0.9752911907137193,
+    "confusion_matrix": [
+      [
+        11681,
+        102,
+        106
+      ],
+      [
+        279,
+        3512,
+        1
+      ],
+      [
+        3,
+        0,
+        4316
+      ]
+    ],
+    "per_class": {
+      "GALAXY": {
+        "precision": 0.9764273175624844,
+        "recall": 0.9825048364033981,
+        "f1-score": 0.9794566493375818,
+        "support": 11889.0
+      },
+      "QSO": {
+        "precision": 0.9717764250138351,
+        "recall": 0.9261603375527426,
+        "f1-score": 0.9484201998379692,
+        "support": 3792.0
+      },
+      "STAR": {
+        "precision": 0.9758082749265204,
+        "recall": 0.9993053947673073,
+        "f1-score": 0.9874170670327156,
+        "support": 4319.0
+      }
+    }
+  },
+  "multiverse_3": {
+    "accuracy": 0.9759,
+    "macro_f1": 0.9723902383135069,
+    "weighted_f1": 0.9757795520230722,
+    "confusion_matrix": [
+      [
+        11660,
+        119,
+        110
+      ],
+      [
+        252,
+        3539,
+        1
+      ],
+      [
+        0,
+        0,
+        4319
+      ]
+    ],
+    "per_class": {
+      "GALAXY": {
+        "precision": 0.9788448623237072,
+        "recall": 0.9807384977710488,
+        "f1-score": 0.9797907650939036,
+        "support": 11889.0
+      },
+      "QSO": {
+        "precision": 0.9674685620557681,
+        "recall": 0.9332805907172996,
+        "f1-score": 0.9500671140939597,
+        "support": 3792.0
+      },
+      "STAR": {
+        "precision": 0.9749435665914221,
+        "recall": 1.0,
+        "f1-score": 0.9873128357526575,
+        "support": 4319.0
+      }
+    }
+  },
+  "lagrange_l1_analysis": {
+    "q05_barrier_threshold": 1.0406426257691461,
+    "deep_basin_95pct_accuracy": 0.9870526315789474,
+    "lagrange_ridge_5pct_accuracy": 0.755,
+    "deep_basin_mean_residual_ke": 1.3791773198833923,
+    "lagrange_ridge_mean_residual_ke": 0.5284767649485318,
+    "qso_median_redshift_deep_basin": 1.727422,
+    "qso_median_redshift_lagrange_ridge": 0.9769289,
+    "selective_coverage_curve": [
+      {
+        "coverage": 0.65,
+        "min_barrier_gap": 1.6724983100719055,
+        "accuracy": 0.9916153846153846,
+        "macro_f1": 0.9899168961503992
+      },
+      {
+        "coverage": 0.7,
+        "min_barrier_gap": 1.6080253335019372,
+        "accuracy": 0.9915714285714285,
+        "macro_f1": 0.9894286032306804
+      },
+      {
+        "coverage": 0.75,
+        "min_barrier_gap": 1.57665088169486,
+        "accuracy": 0.9913333333333333,
+        "macro_f1": 0.9892883100762795
+      },
+      {
+        "coverage": 0.8,
+        "min_barrier_gap": 1.5250450428084075,
+        "accuracy": 0.99125,
+        "macro_f1": 0.9893896403181442
+      },
+      {
+        "coverage": 0.85,
+        "min_barrier_gap": 1.4630403633693971,
+        "accuracy": 0.9904705882352941,
+        "macro_f1": 0.988487949885835
+      },
+      {
+        "coverage": 0.9,
+        "min_barrier_gap": 1.3515236045527912,
+        "accuracy": 0.9898333333333333,
+        "macro_f1": 0.9877878740357762
+      },
+      {
+        "coverage": 0.95,
+        "min_barrier_gap": 1.040655324256861,
+        "accuracy": 0.9870526315789474,
+        "macro_f1": 0.9847621457230034
+      },
+      {
+        "coverage": 1.0,
+        "min_barrier_gap": 0.0018049691409161017,
+        "accuracy": 0.97545,
+        "macro_f1": 0.9717646387360889
+      }
+    ]
+  },
+  "timing": {
+    "single_train_sec": 40.69496470800368,
+    "multiverse_train_sec": 119.83113858298748,
+    "single_inference_20k_ms": 652.5229580001906,
+    "multiverse_inference_20k_ms": 1967.4455625063274
+  },
+  "benchmarks_reference": {
+    "DL_Single_MLP": {
+      "accuracy": 0.9737,
+      "macro_f1": 0.97,
+      "train_sec": 24.16,
+      "inf_ms": 2.83
+    },
+    "DL_3Seed_MLP": {
+      "accuracy": 0.9742,
+      "macro_f1": 0.9705,
+      "train_sec": 72.49,
+      "inf_ms": 8.49
+    },
+    "DL_Full_GBDT_MLP": {
+      "accuracy": 0.9788,
+      "macro_f1": 0.9755,
+      "train_sec": 81.35,
+      "inf_ms": 121.86
+    },
+    "EDL_Pure_ES": {
+      "accuracy": 0.9648,
+      "macro_f1": 0.9599,
+      "train_sec": 13.55,
+      "inf_ms": 1.42
+    },
+    "EDL_TWEANN_Single": {
+      "accuracy": 0.9743,
+      "macro_f1": 0.9706,
+      "train_sec": 94.22,
+      "inf_ms": 7.08
+    },
+    "EDL_TWEANN_Top4": {
+      "accuracy": 0.9745,
+      "macro_f1": 0.9709,
+      "train_sec": 94.22,
+      "inf_ms": 27.26
+    }
+  }
+}
